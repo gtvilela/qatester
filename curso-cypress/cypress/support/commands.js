@@ -46,3 +46,7 @@ Cypress.Commands.add('resetApp', () => {
     cy.get(loc.MENU.SETTINGS).click()
     cy.get(loc.MENU.RESET).click()
 })
+
+Cypress.Commands.add('mensagem', (msg) => {
+    cy.get(loc.MSG).should('contain', msg)
+})

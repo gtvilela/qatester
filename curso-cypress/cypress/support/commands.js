@@ -52,7 +52,7 @@ Cypress.Commands.add("mensagem", (msg) => {
 Cypress.Commands.add("getToken", (user, pwd) => {
   cy.request({
     method: "POST",
-    url: '/signin',
+    url: "/signin",
     body: {
       email: user,
       redirecionar: false,
@@ -68,6 +68,23 @@ Cypress.Commands.add("resetRest", (token) => {
   cy.request({
     method: "GET",
     headers: { Authorization: `JWT ${token}` },
-    url: '/reset',
-  }).its('status').should('be.equal', 200);
+    url: "/reset",
+  })
+    .its("status")
+    .should("be.equal", 200);
+});
+
+Cypress.Commands.add("getAccountByName", (name) => {
+  cy.getToken("gt@gabriela.com", "gt6512").then((token) => {
+    cy.request({
+      method: "GET",
+      headers: { Authorization: `JWT ${token}` }, 
+      url: "/contas",
+      qs: {
+        nome: name,
+      },
+    }).then(res => {
+      return res.body[0].id
+    })
+  });
 });

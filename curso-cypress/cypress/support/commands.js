@@ -61,13 +61,14 @@ Cypress.Commands.add("getToken", (user, pwd) => {
   })
     .its("body.token")
     .should("not.be.empty")
-    .then((token) => token);
+    .then((token) => {
+      Cypress.env('token', token)
+    });
 });
 
-Cypress.Commands.add("resetRest", (token) => {
+Cypress.Commands.add("resetRest", () => {
   cy.request({
     method: "GET",
-    headers: { Authorization: `JWT ${token}` },
     url: "/reset",
   })
     .its("status")
@@ -88,3 +89,14 @@ Cypress.Commands.add("getAccountByName", (name) => {
     })
   });
 });
+
+
+Cypress.Commands.overwrite('request', (originalFn, ...options) => {
+  if(options.length === 1) {
+    if(Cypress.env('token')) {
+    options[0].headers = { Authorization: `JWT ${Cypress.env('token')}`}
+    }
+  }
+
+  return originalFn(...options)
+})

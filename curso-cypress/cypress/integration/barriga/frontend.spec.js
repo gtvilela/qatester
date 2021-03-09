@@ -278,6 +278,82 @@ describe("Should test at a functional level", () => {
   });
 
 
-
+it.only('Should test colors', () => {
+  cy.route({
+    method: "GET",
+    url: "/extrato/**",
+    response: [
+      {
+        conta: "Conta para movimentacoes",
+        id: 423811,
+        descricao: "Receita paga",
+        envolvido: "AAA",
+        observacao: null,
+        tipo: "REC",
+        data_transacao: "2021-03-08T03:00:00.000Z",
+        data_pagamento: "2021-03-08T03:00:00.000Z",
+        valor: "-1500.00",
+        status: true,
+        conta_id: 460241,
+        usuario_id: 13035,
+        transferencia_id: null,
+        parcelamento_id: null,
+      },
+      {
+        conta: "Conta com movimentacao",
+        id: 423812,
+        descricao: "Receita pendente",
+        envolvido: "BBB",
+        observacao: null,
+        tipo: "REC",
+        data_transacao: "2021-03-08T03:00:00.000Z",
+        data_pagamento: "2021-03-08T03:00:00.000Z",
+        valor: "-1500.00",
+        status: false,
+        conta_id: 460242,
+        usuario_id: 13035,
+        transferencia_id: null,
+        parcelamento_id: null,
+      },
+      {
+        conta: "Conta para saldo",
+        id: 423813,
+        descricao: "Despesa paga",
+        envolvido: "CCC",
+        observacao: null,
+        tipo: "DESP",
+        data_transacao: "2021-03-08T03:00:00.000Z",
+        data_pagamento: "2021-03-08T03:00:00.000Z",
+        valor: "3500.00",
+        status: true,
+        conta_id: 460243,
+        usuario_id: 13035,
+        transferencia_id: null,
+        parcelamento_id: null,
+      },
+      {
+        conta: "Conta para saldo",
+        id: 423814,
+        descricao: "Despesa pendente",
+        envolvido: "DDD",
+        observacao: null,
+        tipo: "DESP",
+        data_transacao: "2021-03-08T03:00:00.000Z",
+        data_pagamento: "2021-03-08T03:00:00.000Z",
+        valor: "-1000.00",
+        status: false,
+        conta_id: 460243,
+        usuario_id: 13035,
+        transferencia_id: null,
+        parcelamento_id: null,
+      }
+    ],
+  });
+  cy.get(loc.MENU.EXTRATO).click()
+ cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receita paga')).should('have.class', 'receitaPaga')
+ cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receita pendente')).should('have.class', 'receitaPendente')
+ cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesa paga')).should('have.class', 'despesaPaga')
+ cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesa pendente')).should('have.class', ' ')
+})
 
 });

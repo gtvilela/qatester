@@ -221,4 +221,63 @@ describe("Should test at a functional level", () => {
     ).click();
     cy.mensagem("sucesso");
   });
+
+  it.only("Should validate data and send it to create an account", () => {
+    
+    const reqStub = cy.stub();
+    
+    cy.route({
+      method: "POST",
+      url: "/contas",
+      response: {
+        id: 3,
+        nome: "Conta de teste",
+        visivel: true,
+        usuario_id: 1,
+      },
+      onRequest: reqStub
+      // onRequest: req => {
+      //   expect(req.request.body.nome).to.be.empty
+      //   expect(req.request.headers).to.have.property('Authorization')
+      // }
+    }).as("saveConta");
+    cy.acessarMenuConta();
+
+    cy.route({
+      method: "GET",
+      url: "/contas",
+      response: [
+        {
+          id: 1,
+          nome: "Carteira",
+          visivel: true,
+          usuario_id: 13035,
+        },
+        {
+          id: 2,
+          nome: "Banco",
+          visivel: true,
+          usuario_id: 13035,
+        },
+        {
+          id: 2,
+          nome: "Conta de teste",
+          visivel: true,
+          usuario_id: 1,
+        },
+      ],
+    }).as("contasSave");
+
+    cy.inserirConta("{CONTROL}");
+    // cy.wait('@saveConta').its('request.body.nome').should('not.be.empty')
+    cy.wait('@saveConta').then(() => {
+      expect(reqStub.args[0][0].request.body.nome).to.be.empty
+      expect(reqStub.args[0][0].request.headers).to.have.property('Authorization')
+    })
+    cy.mensagem("Conta inserida com sucesso");
+  });
+
+
+
+
 });

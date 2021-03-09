@@ -4,7 +4,7 @@ import "../../support/commandsContas";
 import loc from "../../support/locators";
 import buildEnv from "../../support/buildEnv";
 
-describe("Should test at a functional level", () => {
+describe("Should test at a frontend level", () => {
   after(() => {
     cy.clearLocalStorage();
   });
@@ -14,6 +14,18 @@ describe("Should test at a functional level", () => {
     cy.login("gt@gabriela.com", "gt6512");
     cy.get(loc.MENU.HOME).click();
   });
+
+  it('Should test responsiveness', () => {
+    cy.get('[data-test=menu-home]').should('exist').and('visible')
+    
+    cy.viewport(500, 700)
+    cy.get('[data-test=menu-home]').should('exist').and('be.not.visible')
+    cy.viewport('iphone-xr')
+    cy.get('[data-test=menu-home]').should('exist').and('be.not.visible')
+    cy.viewport('ipad-2')
+    cy.get('[data-test=menu-home]').should('exist').and('visible')
+  })
+
 
   it("Should create an account", () => {
     cy.route({
@@ -222,7 +234,7 @@ describe("Should test at a functional level", () => {
     cy.mensagem("sucesso");
   });
 
-  it.only("Should validate data and send it to create an account", () => {
+  it("Should validate data and send it to create an account", () => {
     
     const reqStub = cy.stub();
     
@@ -278,7 +290,7 @@ describe("Should test at a functional level", () => {
   });
 
 
-it.only('Should test colors', () => {
+it('Should test colors', () => {
   cy.route({
     method: "GET",
     url: "/extrato/**",
@@ -353,7 +365,9 @@ it.only('Should test colors', () => {
  cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receita paga')).should('have.class', 'receitaPaga')
  cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receita pendente')).should('have.class', 'receitaPendente')
  cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesa paga')).should('have.class', 'despesaPaga')
- cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesa pendente')).should('have.class', ' ')
+ cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesa pendente')).should('have.class', 'despesaPendente')
 })
+
+
 
 });

@@ -6,7 +6,7 @@ it('Igualdade', () => {
     expect(a).equal(1);
     expect(a).to.be.equal(1);
     expect('a').not.to.be.equal('b');
-    expect(a, 'Deveria ser 1').equal(2);
+    expect(a, 'Deveria ser 1').equal(1);
 })
 
 it('Truthy', () => {
@@ -37,8 +37,6 @@ it('Object Equality', () => {
     expect(obj).to.have.property('b', 2)
     expect(obj).to.not.be.empty
     expect({}).to.be.empty
-    expect(obj).include({c:3})
-    expect(obj).to.be.equal({a:1, b:2})
 })
 
 it('Arrays', () => {

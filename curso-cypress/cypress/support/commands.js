@@ -77,18 +77,21 @@ Cypress.Commands.add("resetRest", () => {
 });
 
 Cypress.Commands.add("getAccountByName", (name) => {
-  cy.getToken("gt@gabriela.com", "gt6512").then((token) => {
-    cy.request({
-      method: "GET",
-      headers: { Authorization: `JWT ${token}` }, 
-      url: "/contas",
-      qs: {
-        nome: name,
-      },
-    }).then(res => {
-      return res.body[0].id
-    })
-  });
+  cy.fixture('userData').as('usuario').then( function() {
+    
+    cy.getToken(this.usuario.login, this.usuario.senha).then((token) => {
+      cy.request({
+        method: "GET",
+        headers: { Authorization: `JWT ${token}` }, 
+        url: "/contas",
+        qs: {
+          nome: name,
+        },
+      }).then(res => {
+        return res.body[0].id
+      })
+    });
+  })
 });
 
 

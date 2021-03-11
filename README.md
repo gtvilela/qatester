@@ -1,8 +1,8 @@
-<h1 align="center">
+<h1>
   Testes de aplicações modernas com Cypress :test_tube:
 </h1>
 
-<p align="center">Funcionalidades mais importantes no Cypress para a aplicação de testes e2e.</p>
+<p>Funcionalidades mais importantes no Cypress para a aplicação de testes e2e.</p>
 
 
 <br />
@@ -10,7 +10,7 @@
 
 # ⚙️ Assertivas
 
-<img src="/assets/github-tests-cypress.gif"/>
+<img src="curso-cypress/cypress/assets/github-tests-cypress.gif"/>
 
 <br />
 

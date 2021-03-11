@@ -4,11 +4,10 @@
 
 <p>Funcionalidades mais importantes no Cypress para a aplicação de testes e2e.</p>
 
-
 <br />
 <br />
 
-# ⚙️ Assertivas
+# :arrow_forward: Assertivas
 
 <img src="curso-cypress/cypress/assets/github-tests-cypress.gif"/>
 

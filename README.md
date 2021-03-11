@@ -14,9 +14,9 @@
 
 <br />
 
-# 👨‍💻 Desenvolvimento
+# 👨‍💻 Como rodar os testes?
 
-Para iniciar o desenvolvimento, é necessário clonar o repositório em um diretório de sua preferência:
+Para iniciar os testes, é necessário clonar o repositório em um diretório de sua preferência:
 
 ```bash
 cd ../minha-pasta
@@ -24,7 +24,7 @@ git clone https://github.com/gtvilela/qatester.git
 cd qatester
 ```
 
-Instale as dependências necessárias para o correto funcionamento da aplicação:
+Instale as dependências necessárias para o correto funcionamento dos testes:
 
 ```bash
 npm install
